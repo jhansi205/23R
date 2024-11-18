@@ -1,7 +1,12 @@
-let arr=[1,2,3,4,5,6,7,8];
-let x=arr.map(a=>a**2);
-console.log(x);
+function squareNumbers(arr){
+ var x=arr.map(a=>a**2);
+ return x
+}
+console.log(squareNumbers([1,2,3,4,5,6,7]));
 //string to uppercase using map method
-var arr1=["html","css","js","react","nodejs","python"];
-var x1=arr1.map(a=>a.toUpperCase());
-console.log(x1);
+function stringToUppercase(arr1){
+  var x1=arr1.map(a=>a.toUpperCase());
+  return x1
+}
+console.log(stringToUppercase(["html","css","js","react","nodejs","python"]));
+
