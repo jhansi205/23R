@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="hlo" onclick="demo()">helloo</h1>
+    <button onclick="html()">html</button>
+    <button onclick="css()">css</button>
+    <button onclick="js()">js</button>
+
+    <script>
+      let h1 = document.getElementById("hlo");
+      function demo() {
+        h1.style.color = "red";
+      }
+
+      function html() {
+        h1.innerHTML = "html";
+        h1.style.backgroundColor="red";
+        h1.style.width="125px";
+      }
+      function css() {
+        h1.innerHTML = "css";
+      }
+
+      function js() {
+        h1.innerHTML = "js";
+      }
+    </script>
+  </body>
+</html>
