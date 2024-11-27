@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form1" onsubmit="submission(event)" >
+        <input type="text" id="ip1">
+        <input type="submit" value="submit">
+    </form>
+    <p id="p1"></p>
+    <script>
+      let form1=document.getElementById("form1");
+      let ip1=document.getElementById("ip1");
+      let p1=document.getElementById("p1");
+      function submission(e){
+        e.preventDefault()
+        let input_value = parseInt(ip1.value); let result = ""; for (let i = 1; i <= input_value; i++) { let str = "* ".repeat(i); result += str + "<br>"; } p1.innerHTML = result; }   
+      
+    </script>
+</body>
+</html>

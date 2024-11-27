@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+        }
+      #todolist{
+        width: 100vw;
+        height: 25vh;
+        background-color: red;
+      
+      } 
+      h2{
+        text-align: center;
+      }
+      #ip1{
+        width: 60vw;
+        height: 5vh;
+        margin-left: 40px;
+      } 
+      #list {
+      list-style: none;
+      margin-top: 20px;
+      padding: 0;
+    }
+      #btn{
+        width: 60px;
+        padding: 5px;
+      }
+      #list li {
+      margin: 10px 0;
+      padding: 10px 20px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      background-color: #eee;
+      width: 100vw;
+      }
+      .delete-btn{
+      border: none;
+      background: none;
+      color: red;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+   <div id="todolist">
+   <form id="frm">
+    <h2>My To Do List</h2><br>
+    <input type="text" placeholder="Title...." id="ip1">
+    <input type="submit" value="add" id="btn">
+   </form>
+   </div>
+   <ul id="list">
+   </ul>
+   <script>
+    let form=document.getElementById("frm");
+    let ip1=document.getElementById("ip1")
+    let btn=document.getElementById("btn");
+    let remove=document.getElementById("cancel")
+    form.addEventListener("submit",(e)=>{
+        e.preventDefault()
+      let listItem=document.createElement("li");
+      listItem.innerText=ip1.value
+      ip1.value=""
+      let deleteBtn = document.createElement("button");
+      deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+      deleteBtn.className = "delete-btn";
+      listItem.appendChild(deleteBtn)
+      list.appendChild(listItem);
+      deleteBtn.addEventListener("click",()=>{
+        list.removeChild(listItem)
+      });
+      
+    });
+   </script>
+</body>
+</html>

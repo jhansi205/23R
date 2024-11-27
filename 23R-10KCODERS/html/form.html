@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:  70vh;
+      }
+      #form-container{
+       border: 1px solid;
+        width: 20vw;
+        height: 50vh;
+        padding: 10px;
+        box-shadow: 0px 8px 6px 0px;
+        background-image: url("../assests/nature.jpg");
+        background-size: cover;
+        background-position: center;
+        border-radius: 8px;
+      }
+      #form{
+        padding: 20px;
+      }
+     
+      h2{
+        text-align: center;
+        color: white;
+      }
+      label {
+        color: white;
+        font-size: 14px;
+      }
+
+      #p1 {
+        color: yellow;
+        font-size: 12px;
+        margin-left: 5px;
+      }
+      #music-container{
+        position: relative;
+        top: 220px;
+        right:250px;
+        
+        
+      }
+      #music{
+        width: 25vw;
+        height:10vh;
+      }
+      button{
+        border-radius: 5px;
+        padding: 5px;
+      }
+      input[type="submit"]{
+        background-color: #4CAF50;
+        color: white; 
+        border:none;
+        padding: 10px 20px;
+        width: 180px;
+      }
+    </style>
+    
+</head>
+<body>
+<div id="form-container">
+     <form id="form">
+      <h2>Login</h2>
+     <label>Username:</label><br>
+      <input type="text" id="ip1" required>
+     <br><br>
+     <label for="">Password:</label><br>
+      <input type="password" id="psd" required><br>
+      <input type="checkbox"  id="sp" onclick="ipClick(event)">
+      <span id="p1"></span><br><br>
+      <input type="submit" value="Login">
+     </form>
+</div>
+<div id="music-container">
+  <audio controls id="music">
+    <source src="../assests/Eswara - SenSongsMp3.Com.mp3" type="audio/mp3">
+  </audio><br>
+  <button id="playbtn">Playmusic</button>
+  <button id="pausebtn">Pausemusic</button>
+</div>
+<script>
+ let ip1=document.getElementById("ip1");
+ let pswd=document.getElementById("psd");
+ let checkbox=document.getElementById("sp")
+ let p1=document.getElementById("p1")
+ let song=document.getElementById("music")
+ let plbtn=document.getElementById("playbtn")
+ let pbtn=document.getElementById("pausebtn")
+const ipClick=(event)=>{
+  if(event.target.checked){
+    pswd.type="text"
+   p1.innerText="showpassword"
+  }else{
+    pswd.type="password"
+    p1.innerText="Hidepassword"
+  }
+
+}
+plbtn.addEventListener("click",()=>{
+  song.play()
+})
+pbtn.addEventListener("click",()=>{
+  song.pause()
+})
+</script>
+</body>
+</html>

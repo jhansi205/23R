@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+             height: 100vh;
+             margin: 0;
+             flex-direction: column;
+        }
+        #form1{
+            text-align: center;
+        }
+    #btn{
+      border: 2px solid;
+      border-radius: 24px;
+      width: 140px;
+      height: 40px;
+     font-weight: bold;
+     box-shadow: 0px 8px 0px rgba(0, 0, 0, 0.3); 
+    }
+    #p1{
+       font-size: 20px;
+       font-weight: bold;
+       margin-top: 20px;
+       
+    }
+      
+    </style>
+  </head>
+  <body>
+     <form id="form1" >
+       <input type="button" id="btn" value="Click For OTP"  onclick="btn1()"/>
+       
+     </form>
+     <p id="p1"></p>
+     <script>
+     let form1=document.getElementById("form1");
+     let btn=document.getElementById("btn");
+     let p1=document.getElementById("p1");
+    //  let btn=event.target.value
+     function btn1(){
+        p1.innerHTML="Your OTP is:"+Math.trunc(Math.random()*99999+100000)
+        document.body.style.backgroundColor =
+        "#" + Math.floor(Math.random() *99999+100000).toString();
+
+        
+     }
+    
+     </script>
+  </body>
+</html>
