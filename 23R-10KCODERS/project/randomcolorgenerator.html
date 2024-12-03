@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Build a RandomColorGenerator</title>
+    <style>
+        /* reset default browser styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      /*center content vertically and horizontally*/
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        gap: 5px;/*space b/w elements*/
+      }
+      /*style the button*/
+      #btn {
+        border-radius: 5px;
+        padding: 8px;
+        background-color: black;
+        color: white;
+      }
+      /*style the div that will show the color*/
+      #div1 {
+        width: 300px;
+        height: 300px;
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <!--- container of all elements-->
+    <div class="container">
+      <!--heading of the randomcolor generator-->
+      <h1 id="rcolor">Random Color</h1>
+      <p>If you click button, it will give you random color</p>
+      <!--button to generate random color-->
+      <button id="btn">Click Me</button>
+      <!-- div to display the random color -->
+      <div id="div1"></div>
+    </div>
+    <script>
+        //get references to the button and div elments
+      let btn = document.getElementById("btn");
+      let div = document.getElementById("div1");
+      //Add a click event listener to the button
+      btn.addEventListener("click", (event) => {
+        //generate a random color
+        let color = randomColor();
+        //set the background color of the div to the generated color
+        div.style.backgroundColor = color;
+        // div.style.backgroundColor=randomColor()
+        //  div.style.backgroundColor='#'+Math.floor(Math.random()*16777216).toString(16)
+      });
+      //function to generate a random color
+      function randomColor() {
+        //generate a random hex color code
+        let newColor = "#" + Math.floor(Math.random() * 16777216).toString(16); //256*256*256=16777216
+        return newColor;
+      }
+    </script>
+  </body>
+</html>

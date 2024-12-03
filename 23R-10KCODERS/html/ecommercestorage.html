@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <form id="form1">
+        <label>Id:</label><br />
+      <input type="text" id="productId" /><br /><br />
+      <label>ProductName:</label><br />
+      <input type="text" id="productName" /><br /><br />
+      <label>Productprice:</label><br />
+      <input type="text" id="productPrice" /><br /><br />
+      <label>Ratings:</label><br />
+      <input type="text" id="ratings" /><br /><br />
+      <input type="submit" value="Submit" />
+      </form>
+    </div>
+    <script>
+      let form=document.getElementById("form1")
+      form1.addEventListener("submit",(e)=>{
+        e.preventDefault()
+         // Retrieve input values within the event listener
+        let productId=document.getElementById("productId").value;
+      let productName=document.getElementById("productName").value;
+      let productPrice=document.getElementById("productPrice").value;
+      let productRatings=document.getElementById("ratings").value;
+        // Create a product object
+         const product={
+            id:productId,
+            name:productName,
+            price:parseFloat(productPrice),
+            rating:parseFloat(productRatings)
+
+        };
+        // Get existing products from local storage or initialize an empty array 
+        let products = JSON.parse(localStorage.getItem("products")) || []; 
+        // Add the new product to the array 
+        products.push(product); 
+        // Save the updated array back to localStorage
+         localStorage.setItem("products", JSON.stringify(products)); 
+         // Log the current state of products
+         console.log(products);
+          // Reset the form
+         form.reset()
+      });
+    </script>
+  </body>
+</html>
