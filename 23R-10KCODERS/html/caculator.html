@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            color: #2c3e50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+    
+        #form1 {
+            background-color: #ffffff;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 320px;
+        }
+    
+        #ip1 {
+            width: 100%;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            padding: 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            color: #333;
+            outline: none;
+        }
+    
+        #ip1:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+    
+        input[type="button"] {
+            width: 65px;
+            height: 65px;
+            margin: 5px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    
+        input[type="button"]:hover {
+            background-color: #2980b9;
+        }
+    
+        input[type="submit"] {
+            width: 100%;
+            height: 50px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    
+        #op {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+    
+</head>
+<body>
+    <form id="form1" onsubmit="evaluation(event)">
+        <input type="text" id="ip1">
+        <br>
+        <input type="button" value="(" onclick="input(event)">
+        <input type="button" value=")" onclick="input(event)">
+        <input type="button" value="%" onclick="input(event)">
+        <input type="button" value="C" onclick="clearDisplay()"><br>
+        <input type="button" value="7" onclick="input(event)">
+        <input type="button" value="8" onclick="input(event)">
+        <input type="button" value="9" onclick="input(event)">
+        <input type="button" value="/" onclick="input(event)"><br>
+        <input type="button" value="4" onclick="input(event)">
+        <input type="button" value="5" onclick="input(event)">
+        <input type="button" value="6" onclick="input(event)">
+        <input type="button" value="*" onclick="input(event)">
+        <br>
+        <input type="button" value="1" onclick="input(event)">
+        <input type="button" value="2" onclick="input(event)">
+        <input type="button" value="3" onclick="input(event)">
+        <input type="button" value="-" onclick="input(event)"><br>
+        <input type="button" value="0" onclick="input(event)">
+        <input type="button" value="." onclick="input(event)">
+        <input type="button" value="=" onclick="evaluation(event)">
+        <input type="button" value="+" onclick="input(event)">
+      
+        
+        <br>
+      
+    </form>
+    <p id="op"></p>
+    <script>
+    let op = document.getElementById("op");
+    let form = document.getElementById("form1");
+    let display = document.getElementById("ip1");
+
+    function input(event) {
+        const value = event.target.value;
+        display.value += value;
+    }
+
+    function evaluation(event) {
+        event.preventDefault(); // Prevent form submission
+        try {
+            let res = eval(display.value); // Evaluate the expression
+            display.value = res; // Display the result
+        } catch (error) {
+            display.value = "Error"; // Handle invalid expressions
+        }
+    }
+
+    function clearDisplay() {
+        display.value = ""; // Clear the display
+    }
+</script>
+
+</body>
+</html>
