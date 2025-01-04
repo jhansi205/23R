@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards</title>
+</head>
+<body>
+   <div class="container">
+    <form id="form1">
+        <label>Username</label><br>
+    <input type="text"id="inp1"><br><br>
+    <label>Role</label><br>
+    <input type="text"  id="inp2"><br><br>
+    <label>Id</label><br>
+        <input type="text" id="inp3"><br><br>
+        <label>Email</label><br>
+         <input type="email"  id="inp4"><br><br>
+        <input type="button" value="Submit" id="btn" onclick="cards()">
+    </form>
+    <a href="page1.html">page1</a>
+   </div> 
+   <script>
+    let form1=document.getElementById("form1")
+    let arr=[]
+   function cards(){
+    let inp1=document.getElementById("inp1").value
+    let inp2=document.getElementById("inp2").value
+    let inp3=document.getElementById("inp3").value
+    let inp4=document.getElementById("inp4").value
+       let obj={
+        username:inp1,
+        role:inp2,
+        id:inp3,
+        email:inp4
+       }
+       arr.push(obj)
+    console.log(arr);
+    localStorage.setItem("loginData",JSON.stringify(arr))
+   
+       form1.reset()
+   }
+
+   </script>
+</body>
+</html>

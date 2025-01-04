@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // class Dog{
+        //     name;
+        //     breed;
+        //     constructor(n,b){
+        //        this.name=n;
+        //        this.breed=b;
+        //     }
+        //    bark(){
+        //     console.log("barking");
+            
+        //    }
+        // }
+        // let obj1=new Dog("puppy","Labrador");
+        // let obj2=new Dog("daisy","Labrador")
+        // console.log(obj1);
+        // console.log(obj2);
+        // obj1.bark()
+        // obj2.bark()
+
+        //encapsulation
+        class Employee{
+            #name;
+            #id;
+            #salary;
+            constructor(n,i,s){
+                this.#name=n;
+                this.#id=i;
+                this.#salary=s;
+            }
+            get name(){
+                return this.#name;
+            }
+             set setsalary(sal){
+                this.#salary=sal
+             }
+        }
+        let emp1=new Employee("john",1,200000)
+        let emp2=new Employee("james",2,300000)
+        console.log(emp1);
+        emp1.setsalary=400000
+        console.log(emp1.name);
+        console.log(emp2.name);
+        console.log(emp1);
+        
+    </script>
+</body>
+</html>

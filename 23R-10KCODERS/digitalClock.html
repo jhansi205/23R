@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #6a11cb, #2575fc);
+            color: #ffffff;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 0; 
+            padding: 10px 20px;
+           
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+     <h2 id="heading2"></h2>
+    </div>
+    <script>
+        let parent=document.getElementById("container")
+        async function getTime() {
+            let displayTime=document.getElementById("heading2")
+         setInterval(()=>{
+            let date=new Date()
+            const formattedTime=date.toLocaleTimeString()
+            console.log(formattedTime);
+            displayTime.innerText=formattedTime
+         },1000)
+        }
+        getTime()
+    </script>
+</body>
+</html>

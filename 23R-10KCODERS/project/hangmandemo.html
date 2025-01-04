@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      overflow: hidden;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 15px 20px;
+      color: white;
+      z-index: 1000;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      position: relative;
+    }
+
+    .navbar ul li {
+      margin: 0 15px;
+      position: relative;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .navbar ul li a:hover {
+      color: #f0c419;
+    }
+
+    #drop-down {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 10px 0;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    #drop-down a {
+      color: white;
+      padding: 10px 20px;
+      display: block;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    #drop-down a:hover {
+      background-color: #2575fc;
+    }
+
+    .navbar ul li:hover #drop-down {
+      display: block;
+    }
+
+    .sigIn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 400px;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .sigIn.active {
+      display: block;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .sigIn h2 {
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      width: 100%;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #2575fc;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      padding: 12px 15px;
+      background-color: #2575fc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #004dcf;
+    }
+
+    #signupTrigger {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #signupTrigger:hover {
+      background-color: #218838;
+    }
+
+    .fa-caret-right {
+      position: absolute;
+      top: 40%;
+      left: 45%;
+      font-size: 100px;
+      cursor: pointer;
+      z-index: 10;
+      display: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .fa-caret-right.show {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .sigIn {
+        width: 95%;
+      }
+
+      .navbar ul li a {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="brand">Hangman Game</div>
+    <ul>
+      <li>
+        <a href="#" id="signupTrigger">Sign Up</a>
+        <div id="drop-down">
+          <a href="#">Sign In</a>
+          <a href="#">Login</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main content -->
+  <div class="content">
+    <img src="../assests/hangmandemo.png" alt="Hangman Game" id="image" />
+    <i class="fa-solid fa-caret-right" id="nextArrow"></i>
+    <div class="sigIn" id="sigin">
+      <h2>Create Your Account</h2>
+      <form id="signupForm">
+        <label for="signupname">Username:</label>
+        <input type="text" placeholder="Username" required id="signupname" />
+        <label for="signupEmail">Email:</label>
+        <input type="email" placeholder="Email" required id="signupEmail" />
+        <label for="signupPassword">Password:</label>
+        <input type="password" placeholder="Password" required id="signupPassword" />
+        <input type="submit" value="Sign Up" />
+      </form>
+      </div>
+      <div class="logIn" id="login"  style="display: none;">
+        <h2>Login</h2>
+      <form id="loginform">
+        <label for="loginname">Username:</label>
+        <input type="text" placeholder="Username" required id="loginname" />
+        <label for="loginPassword">Password:</label>
+        <input type="password" placeholder="Password" required id="loginPassword" />
+        <input type="submit" value="Login">
+      </form>
+    </div>
+  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+  
+    const firebaseConfig = {
+      apiKey: "AIzaSyAL8UTLeb3c96h8wW_S8advs9i7mJz1kSA",
+      authDomain: "hangman-466f8.firebaseapp.com",
+      projectId: "hangman-466f8",
+      storageBucket: "hangman-466f8.appspot.com",
+      messagingSenderId: "543284230871",
+      appId: "1:543284230871:web:cc333b128abe354e278e92"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+  
+    // DOM Elements
+    const signupTrigger = document.getElementById("signupTrigger");
+    const signinForm = document.getElementById("sigin");
+    const signupForm = document.getElementById("signupForm");
+    const play = document.getElementById("nextArrow");
+    const loginForm = document.getElementById("login");
+    const login = document.getElementById("loginform");
+  
+    let isSignedIn = false;
+  
+    // Show Signup Form
+    signupTrigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      signinForm.classList.add("active");
+      loginForm.style.display = "none";
+    });
+  
+    // Handle Signup Form Submission
+    signupForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+  
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+  
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          alert("Signup successful!");
+          isSignedIn = true;
+          play.style.display = "block"; // Show play button
+          signinForm.classList.remove("active");
+        })
+        .catch((error) => {
+          alert(`Signup failed: ${error.message}`);
+        });
+    });
+  
+    // Handle Login Form Submission
+    login.addEventListener("submit", (event) => {
+      event.preventDefault();
+  
+      const email = document.getElementById("loginname").value;
+      const password = document.getElementById("loginPassword").value;
+  
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("Login successful!");
+          isSignedIn = true;
+          play.style.display = "block"; // Show play button
+          loginForm.style.display = "none";
+        })
+        .catch((error) => {
+          alert(`Login failed: ${error.message}`);
+        });
+    });
+  
+    // Redirect on Play Button Click
+    play.addEventListener("click", () => {
+      if (isSignedIn) {
+        window.location.href = "hangmanproject.html";
+      } else {
+        alert("Please sign in first to proceed.");
+      }
+    });
+  
+    // Optional: Anonymous Sign-In Logic
+    signInAnonymously(auth)
+      .then(() => console.log("Signed in anonymously"))
+      .catch((error) => console.error("Anonymous sign-in failed", error));
+  </script>
+  
+
+  </body>
+  </html>

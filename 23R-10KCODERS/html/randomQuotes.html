@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Quotes</title>
+    <style>
+      /* Apply a clean and readable font to the entire body, center text, and add some top margin */
+      body {
+        font-family: Arial, sans-serif; /* Use a modern, sans-serif font for clarity */
+        text-align: center; /* Center-align text on the page */
+        margin-top: 50px; /* Add spacing from the top of the page */
+      }
+
+      /* Style the main container to center content and add a card-like appearance */
+      .container {
+        max-width: 600px; /* Set a maximum width for the container for readability */
+        margin: 0 auto; /* Center the container horizontally */
+        padding: 20px; /* Add padding inside the container for spacing */
+        border: 1px solid #ccc; /* Add a light gray border for definition */
+        border-radius: 10px; /* Round the corners for a softer look */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+      }
+
+      /* Style the area where the quote will be displayed */
+      #quote-Element {
+        font-size: 20px; /* Set a larger font size for prominence */
+        margin-top: 20px; /* Add spacing above the quote */
+        font-style: italic; /* Use italics to distinguish the quote */
+      }
+
+      /* Style the area where the author of the quote will be displayed */
+      #quote-Author {
+        margin-top: 10px; /* Add spacing above the author text */
+        font-weight: bold; /* Make the author's name bold for emphasis */
+      }
+
+      /* Style the button to make it prominent and interactive */
+      button {
+        padding: 10px 20px; /* Add padding for a comfortable button size */
+        font-size: 16px; /* Use a standard font size for readability */
+        background-color: #007bff; /* Use a blue background to make the button stand out */
+        color: white; /* Use white text for contrast */
+        border: none; /* Remove the default button border */
+        border-radius: 5px; /* Round the button corners for a modern look */
+        cursor: pointer; /* Change the cursor to a pointer on hover */
+      }
+
+      /* Add a hover effect to the button for interactivity */
+      button:hover {
+        background-color: #0056b3; /* Darken the button color on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <h1>Random Quote Generator</h1>
+      <button id="btn">Quote Generator</button>
+    </div>
+    <script>
+      let btn = document.getElementById("btn");
+      let parent = document.getElementById("container");
+      let quoteData = [
+        {
+          quote:
+            "Life isn’t about getting and having, it’s about giving and being.",
+          author: "Kevin Kruse",
+        },
+        {
+          quote:
+            "Whatever the mind of man can conceive and believe, it can achieve.",
+          author: "Napoleon Hill",
+        },
+        {
+          quote: "Strive not to be a success, but rather to be of value.",
+          author: "Albert Einstein",
+        },
+        {
+          quote:
+            "Two roads diverged in a wood, and I—I took the one less traveled by, And that has made all the difference.",
+          author: "Robert Frost",
+        },
+        {
+          quote:
+            "I attribute my success to this: I never gave or took any excuse.",
+          author: "Florence Nightingale",
+        },
+        {
+          quote: "You miss 100% of the shots you don’t take.",
+          author: "Wayne Gretzky",
+        },
+      ];
+      // Append the quote to the container
+      let quoteElement = document.createElement("div");
+      let quoteAuthor = document.createElement("div");
+      quoteElement.id = "quote-Element";
+      quoteAuthor.id = "quote-Author";
+      parent.append(quoteElement, quoteAuthor);
+
+      btn.addEventListener("click", () => {
+        // Generate a random quote
+        let randomIndex = Math.floor(Math.random() * quoteData.length);
+        let randomQuote = quoteData[randomIndex];
+
+        // Create and display the random quote
+        quoteElement.innerText = `${randomQuote.quote}`;
+        quoteAuthor.innerText = `- ${randomQuote.author}`;
+        console.log(parent);
+      });
+    </script>
+  </body>
+</html>
+

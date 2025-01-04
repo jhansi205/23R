@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+</head>
+<body>
+    <div class="container" id="container"></div>
+    <script>
+        async function getData(){
+            const data=await fetch("https://api.openweathermap.org/data/2.5/weather?q=delhi&units=metric&appid=466ddaa21a8de191e9f608bd11a56acb")
+            const weatherData=await data.json()
+            console.log(weatherData);
+            const weather=weatherData.weather[0].main
+            // const temp=weatherData.main.temp
+            // console.log(temp);
+            const container=document.getElementById("container")
+            const weatherContainer=document.createElement("div")
+            const weatherList=document.createElement("ul")
+            const itemList1=document.createElement("li")
+            itemList1.textContent=weatherData.main.temp
+            const itemList2=document.createElement("li")
+            itemList2.textContent=weatherData.main.humidity
+            const itemList3=document.createElement("li")
+            itemList3.textContent=weatherData.main.temp_max
+            const itemList4=document.createElement("li")
+            itemList4.textContent=weatherData.main.pressure
+            const itemList5=document.createElement("li")
+            itemList5.textContent=weatherData.main.sea_level
+            weatherList.append(itemList1,itemList2,itemList3,itemList4,itemList5)
+            weatherContainer.append(weatherList)
+            container.append(weatherContainer)
+           
+        }
+        getData()
+    </script>
+</body>
+</html>

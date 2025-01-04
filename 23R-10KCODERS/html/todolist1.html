@@ -1,143 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    />
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: #f5f5f5;
-        }
-      #todolist{
-        width: 100vw;
-        height: 25vh;
-        background-color: red;
-      
-      } 
-      h2{
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Arial", sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        color: #2c3e50;
+      }
+
+      /* To-Do List Container */
+      #todolist {
+        width: 90%;
+        max-width: 450px;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
         text-align: center;
       }
-      #ip1{
-        width: 60vw;
-        height: 4vh;
-        margin-left: 40px;
-      } 
+
+      /* Title */
+      h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #34495e;
+      }
+
+      /* Input Styles */
+      #ip1 {
+        width: 70%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 25px;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      #ip1:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+      }
+
+      /* Add Button Styles */
+      #btn {
+        padding: 10px 20px;
+        margin-left: 10px;
+        background-color: #3498db;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      #btn:hover {
+        background-color: #2980b9;
+      }
+
+      /* List Styles */
       #list {
-      list-style: none;
-      margin-top: 20px;
-      padding: 0;
-    }
-      #btn{
-        height: 40px;
-            padding: 0 15px;
-            margin-left: 10px;
-            background-color: #2ecc71;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        list-style: none;
+        margin-top: 20px;
+        padding: 0;
       }
+
       #list li {
-      margin: 10px 0;
-      padding: 10px 20px;
-      border-radius: 5px;
-      display: flex;
-      justify-content: space-between;
-      background-color: #eee;
-      width: 100vw;
+        margin: 10px 0;
+        padding: 15px 20px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.3s ease;
       }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Button Container Styles */
       .btn-container {
-            display: flex;
-            gap: 10px;
-        }
-      #edit-btn{
-      border: none;
-      background:green;
-      color:white;
-      border-radius:16px;
-      padding:8px 15px;
-      font-size: 16px;
-      cursor: pointer;
+        display: flex;
+        gap: 10px;
       }
-      #delete-btn{
-      border: none;
-      background: #f44336;
-      color:white;
-      border-radius: 20px;
-      padding:8px 15px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    </style>
-</head>
-<body>
-   <div id="todolist">
-   <form id="frm">
-    <h2>My To Do List</h2><br>
-    <input type="text" placeholder="Title...." id="ip1">
-    <input type="submit" value="add" id="btn">
-   </form>
-   </div>
-   <ul id="list">
-   </ul>
-   <script>
-   let form=document.getElementById("frm");
-   let ip1=document.getElementById("ip1");
-   let add=document.getElementById("btn");
-   let list=document.getElementById("list")
-   form.addEventListener("submit",(e)=>{
-    e.preventDefault()
-    //creating one list item
-    let listItem=document.createElement("li");
-    //inserting input text in the list item
-    listItem.innerText=ip1.value;
-    //creating one div element 
-    let btnContainer = document.createElement("div");
-    //creating button classname
-    btnContainer.className = "btn-container";
-    //creating the button name editbtn
-    let editbtn=document.createElement("button");
-    //changing the button name
-    editbtn.innerHTML="Edit"
-      //creating button id
-    editbtn.id="edit-btn"
-    //creating another button 
-    let deletebtn=document.createElement("button");
-    //changing the button name
-    deletebtn.innerHTML='delete';
-    //creating button id
-     deletebtn.id = "delete-btn";
-     // Appending the Edit and Delete buttons to the button container
-     btnContainer.append(editbtn, deletebtn);
-     //inserting div element into the list item
-     listItem.append(btnContainer);
-    //inserting listitem into the list
-    list.append(listItem);
-    //removing the listitem from the list when delete button is clicked
-    deletebtn.addEventListener("click",()=>{
-        let confirmation=window.confirm("Are u sure?");
-        if(confirmation){
-            list.removeChild(listItem);
+
+      /* Edit and Delete Button Styles */
+      #edit-btn,
+      #delete-btn {
+        border: none;
+        border-radius: 25px;
+        padding: 8px 15px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      #edit-btn {
+        background-color: #1abc9c;
+        color: white;
+      }
+
+      #edit-btn:hover {
+        background-color: #16a085;
+      }
+
+      #delete-btn {
+        background-color: #e74c3c;
+        color: white;
+      }
+
+      #delete-btn:hover {
+        background-color: #c0392b;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 600px) {
+        #ip1 {
+          width: 60%;
         }
-    })
-    editbtn.addEventListener("click",()=>{
-        
-    })
-    //empty input value
-    ip1.value=""
-   })
-   </script>
-</body>
+
+        #btn {
+          padding: 8px 15px;
+          font-size: 14px;
+        }
+
+        #list li {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .btn-container {
+          margin-top: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="todolist">
+      <form id="frm">
+        <h2>My To Do List</h2>
+        <br />
+        <input type="text" placeholder="Title...." id="ip1" />
+        <input type="submit" value="add" id="btn" />
+      </form>
+    </div>
+    <ul id="list"></ul>
+    <script>
+      let form = document.getElementById("frm");
+      let ip1 = document.getElementById("ip1");
+      let add = document.getElementById("btn");
+      let list = document.getElementById("list");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        //creating one list item
+        let listItem = document.createElement("li");
+        //inserting input text in the list item
+        listItem.innerText = ip1.value;
+        //creating one div element
+        let btnContainer = document.createElement("div");
+        //creating button classname
+        btnContainer.className = "btn-container";
+        //creating the button name editbtn
+        let editbtn = document.createElement("button");
+        //changing the button name
+        editbtn.innerHTML = "Edit";
+        //creating button id
+        editbtn.id = "edit-btn";
+        //creating another button
+        let deletebtn = document.createElement("button");
+        //changing the button name
+        deletebtn.innerHTML = "delete";
+        //creating button id
+        deletebtn.id = "delete-btn";
+        // Appending the Edit and Delete buttons to the button container
+        btnContainer.append(editbtn, deletebtn);
+        //inserting div element into the list item
+        listItem.append(btnContainer);
+        //inserting listitem into the list
+        list.append(listItem);
+
+        editbtn.addEventListener("click", () => {
+          if (editbtn.textContent === "Edit") {
+            // Preserve the current text and replace it with an input field
+            let currentText = listItem.firstChild.textContent;
+            let inputField = document.createElement("input");
+            inputField.type = "text";
+            inputField.value = currentText;
+            listItem.firstChild.textContent = ""; // Clear current text
+            listItem.insertBefore(inputField, btnContainer);
+
+            // Change button text to Save
+            editbtn.textContent = "Save";
+          } else {
+            // Save the new value from the input field
+            let inputField = listItem.querySelector("input");
+            listItem.firstChild.textContent = inputField.value;
+            inputField.remove(); // Remove the input field
+
+            // Change button text back to Edit
+            editbtn.textContent = "Edit";
+          }
+        });
+
+        //removing the listitem from the list when delete button is clicked
+        deletebtn.addEventListener("click", () => {
+          let confirmation = window.confirm("Are u sure?");
+          if (confirmation) {
+            list.removeChild(listItem);
+          }
+        });
+        //empty input value
+        ip1.value = "";
+      });
+    </script>
+  </body>
 </html>

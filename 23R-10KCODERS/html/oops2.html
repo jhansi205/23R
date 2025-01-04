@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Animal{
+            weight;
+            height;
+            constructor(weight,height){
+                this.height=height;
+                this.weight=weight;
+            }
+            details(){
+                    console.log(`height is ${this.height} and weight is ${this.weight}`);
+                    
+                }
+        }
+            class Dog extends Animal {
+                breed;
+                food;
+                constructor(b,f,weight,height) {
+                    super(weight,height);
+                    this.breed=b;
+                    this.food=f;
+                }
+                details(){
+                    console.log(`breed is ${this.breed} and food is ${this.food}`);
+                    
+                }
+            }
+            let obj1=new Animal("1feet","2kgs","husky","chips");
+            let obj2=new Dog("4feet","40kgs","pitbull","chicken");
+        
+            console.log(obj1);
+           obj1.details()
+          //polymorpism 
+        
+    </script>
+</body>
+</html>

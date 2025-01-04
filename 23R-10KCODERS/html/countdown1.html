@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown</title>
+    <style>
+        /* General styles for the page */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #282c34;
+            color: white;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            body {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            #child {
+                font-size: 40px;
+            }
+
+            #btn {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+        }
+
+        /* Styling the container */
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Styling the countdown text */
+        #child {
+            font-size: 60px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Styling the button */
+        #btn {
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #ff4500;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #btn:hover {
+            background: #ff6347;
+        }
+
+        /* Styling the "Happy New Year" message */
+        #child2 {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none; /* Initially hide the message */
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div id="child"></div>
+        <div id="child2">Happy New Year!</div> <!-- Added this div for the "Happy New Year" message -->
+        <button id="btn">Start</button>
+    </div>   
+    <script>
+        let child = document.getElementById("child");
+        let btn = document.getElementById("btn");
+        let child2 = document.getElementById("child2");
+        
+        btn.addEventListener("click", () => {
+            let count = 10;
+            child.textContent = count;
+            child.style.fontSize = "60px";
+
+            let timer = setInterval(() => {
+                if (count > 1) {
+                    count--;
+                    child.textContent = count;
+
+                    // Randomize the text color
+                    let randomColor = "#" + Math.floor(Math.random() * 16777216).toString(16).padStart(6, '0');
+                    child.style.color = randomColor;
+                } else {
+                    // Show "Happy New Year!" and add random text shadow
+                    child2.style.display = "block";
+                    
+                    let randomShadowColor = "#" + Math.floor(Math.random() * 16777216).toString(16).padStart(6, '0');
+                    child2.style.textShadow = `2px 2px 5px ${randomShadowColor}`;
+
+                    clearInterval(timer);
+                }
+            }, 1000); // 1-second interval
+        });
+    </script>
+</body>
+</html>

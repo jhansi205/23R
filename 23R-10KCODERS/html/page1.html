@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+           display: flex;
+           grid-template-columns: auto auto auto;
+           gap:5px
+        }
+        .container>div{
+            border: 1px solid blue;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container"></div>
+    <a href="page2.html">page2</a>
+    <script>
+        let data=JSON.parse(localStorage.getItem("loginData"));
+        // document.write(data[0].username);
+        let parent=document.getElementById("container")
+        let newData=data.map((val)=>{
+            let child=document.createElement("div")
+            let child1=document.createElement("div")
+            let child2=document.createElement("div")
+            let child3=document.createElement("div")
+            let child4=document.createElement("div")
+            // document.write(val.username,val.role,val.id,val.email)
+           child1.innerHTML=val.username
+           child2.innerHTML=val.role
+           child3.innerHTML=val.id
+           child4.innerHTML=val.email
+        console.log(parent);
+        
+           parent.append(child)
+           child.append(child1,child2,child3,child4)
+       
+        
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery</title>
+    <style>
+      body{
+          font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .recipe {
+            display: flex;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            align-items: center;
+            gap: 15px;
+        }
+        .recipe img {
+            max-width: 150px;
+            border-radius: 5px;
+        }
+        .recipe-content {
+            display: flex;
+            flex-direction: column;
+        }
+        .recipe-content h2 {
+            font-size: 1.2em;
+            margin: 0 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" class="container">
+     <div id="recipeContainer"></div>
+    </div>
+    <script>
+     async function pizzaDelivery(){
+       let res= await fetch("https://api.edamam.com/search?q=pizza&app_id=a52b4d43&app_key=e0e5c667605f5e91d8275c973531b80a")
+        let data=await res.json()
+       const foodData=data.hits
+       const recipeContainer = document.getElementById('recipeContainer');
+       foodData.map((recipes)=>{
+        const recipe=recipes.recipe
+        console.log(recipes);
+        
+        const recipeCard=document.createElement("div")
+        recipeCard.classList.add='recipe'
+       const recipeimage=document.createElement("img")
+       recipeimage.src=recipe.image
+       const recipeHealthLabels=recipe.healthLabels
+      //  receipeHealthLabels.innerText=
+      recipeCard.append(recipeHealthLabels)
+      const recipeIngredients=recipe.ingredients
+      // Create a container for the ingredients list
+const ingredientsTitle = document.createElement('p');
+ingredientsTitle.textContent = 'Ingredients:';
+const ingredientsList = document.createElement('ul');
+      recipeIngredients.map((ingredients)=>{
+        const ingredientItem = document.createElement('li');
+    ingredientItem.textContent = ingredients.text; // Assuming `text` holds the ingredient description
+    ingredientsList.appendChild(ingredientItem);
+        
+      })
+      recipeCard.appendChild(ingredientsTitle);
+     recipeCard.appendChild(ingredientsList);
+       recipeCard.append(recipeIngredients)
+       recipeCard.append(recipeimage) 
+       recipeContainer.append(recipeCard)
+        
+       })
+        
+     }
+     pizzaDelivery()
+    </script>
+</body>
+</html>
