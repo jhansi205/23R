@@ -1,0 +1,51 @@
+useEffect:
+it used to perform side effects fetch,timers
+
+it replace three methods 
+
+useEffect
+componentdidmount by defult useEffect
+//prop or state update  and rerender  use dependency
+dependency array[] val ichi modify ayitha rerender avvutundi based on val
+componentdidupdate
+
+
+ useeffect return
+cleanup function//to prevent memory leaks
+componetwillunmount
+
+
+memory leaks:
+usage of storage and data even after the component is unmounted
+
+Routing:
+to move from one webpage to another webpage
+
+to show the different pages/to load components
+
+
+third party  library to (react-router-dom) implement routing in react
+
+browser router
+it is a component that wraps all the routes in react
+routes
+it is container for all the routes
+route
+it is the end point for redirecting to a particular component/page
+ it has two props:
+ path--"endpoint"
+ element-{<component/>}
+
+
+
+link
+
+it provides the reference to the endpoint
+
+dynamic Routing
+
+useNavigate()
+const navigate=useNavigate()
+to
+options
+navigate("endpoint")

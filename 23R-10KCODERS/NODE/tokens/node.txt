@@ -1,0 +1,28 @@
+dotenv
+it is used to create a enviroment files
+
+
+.env
+it contains the credientials for the application
+
+require("dotenv").config()
+
+process.env."key_name"
+
+
+jsonwebtoken:
+
+it is used to generate tokens
+webtokens
+to validate the user with token instead of credientials
+
+authentication
+
+to verify the authenticity of the user
+
+
+authorization:
+it checks the users authority
+
+
+sign({payload},"secret_key",{expiresIn})

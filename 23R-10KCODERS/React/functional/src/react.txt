@@ -1,0 +1,16 @@
+strict mode:
+react runs in development mode
+
+js code:
+return ->{}
+
+
+exports
+named export
+the component should be imported with the same name
+the comp should be written in curly braces{}
+
+
+default export
+can be imported with any name
+only one default export is allowed

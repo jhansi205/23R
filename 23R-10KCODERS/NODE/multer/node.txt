@@ -1,0 +1,16 @@
+sign:
+it generates token based on payload encoded with security key
+decode:
+it decodes any jwt token irrespective of security key
+
+verify:
+
+it verifies the signature of the token along the data and it is also verifies the expiry of token
+
+blob:binary large object
+
+ multipart/formdata
+ 
+multer:
+it handles the files from the request
+

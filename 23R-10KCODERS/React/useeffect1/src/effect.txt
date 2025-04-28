@@ -1,0 +1,13 @@
+useeffect:
+componentDidMount()
+
+
+Dependency array[]
+componentDidUpdate()
+
+
+by defining a clean-up function
+componentwillunmount
+
+
+Memory leak

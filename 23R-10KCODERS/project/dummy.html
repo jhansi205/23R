@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <style>
+        /* ========== GENERAL PAGE STYLES ========== */
+        body {
+            font-family: Arial, sans-serif; /* Sets font for the entire page */
+            display: flex; /* Enables flexbox layout */
+            justify-content: center; /* Centers content horizontally */
+            align-items: center; /* Centers content vertically */
+            height: 100vh; /* Full viewport height */
+            background-color: #f4f4f4; /* Light gray background */
+            margin: 0; /* Removes default margin */
+        }
+
+        /* ========== GAME CONTAINER ========== */
+        .game-container {
+            text-align: center; /* Centers text within the container */
+            border: 2px solid #333; /* Dark border around the game */
+            padding: 20px; /* Adds space inside the container */
+            background-color: white; /* White background */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+        }
+
+        /* ========== WORD DISPLAY ========== */
+        .word {
+            font-size: 2rem; /* Large font size */
+            margin: 20px 0; /* Adds space above and below */
+            letter-spacing: 5px; /* Spaces out each letter */
+            font-weight: bold; /* Makes letters bold */
+        }
+
+        /* ========== HANGMAN IMAGE STYLES ========== */
+        .hangman-img {
+            height: 150px; /* Fixed height for the hangman display */
+            margin: 20px 0; /* Space above and below */
+        }
+
+        /* ========== INCORRECT GUESSES DISPLAY ========== */
+        .wrong-guesses {
+            font-size: 1.2rem; /* Slightly larger text */
+            color: red; /* Red text for incorrect guesses */
+            font-weight: bold; /* Makes text bold */
+        }
+
+        /* ========== KEYBOARD BUTTONS ========== */
+        .keyboard {
+            display: grid; /* Arranges buttons in a grid */
+            grid-template-columns: repeat(13, 1fr); /* Creates 13 equal columns */
+            gap: 5px; /* Adds space between buttons */
+            margin: 20px 0; /* Space above and below */
+            max-width: 600px; /* Limits width */
+            margin: auto; /* Centers the keyboard */
+        }
+
+        /* ========== INDIVIDUAL LETTER BUTTONS ========== */
+        .keyboard button {
+            padding: 10px; /* Adds space inside the button */
+            font-size: 1.2rem; /* Sets button text size */
+            cursor: pointer; /* Changes cursor to pointer on hover */
+            background-color: #007bff; /* Blue background */
+            color: white; /* White text */
+            border: none; /* Removes default border */
+            border-radius: 5px; /* Rounds button corners */
+            transition: background-color 0.3s ease; /* Smooth color change */
+        }
+
+        /* ========== BUTTON HOVER AND CLICK EFFECTS ========== */
+        .keyboard button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .keyboard button:disabled {
+            background-color: #ccc; /* Gray out used letters */
+            cursor: not-allowed; /* Changes cursor to indicate it's disabled */
+        }
+
+        /* ========== WIN/LOSE MESSAGES ========== */
+        .message {
+            font-size: 1.5rem; /* Larger text size */
+            font-weight: bold; /* Bold text */
+            margin-top: 20px; /* Space above */
+        }
+
+        .win {
+            color: green; /* Green text for winning */
+        }
+
+        .lose {
+            color: red; /* Red text for losing */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Hangman Game</h1>
+        
+        <!-- Display area for the hangman image or drawing -->
+        <div id="hangman" class="hangman-img"></div>
+
+        <!-- Display the word to be guessed as underscores -->
+        <div id="words" class="word"></div>
+
+        <!-- Display incorrect guesses -->
+        <div id="wrong-guesses" class="wrong-guesses"></div>
+
+        <!-- Virtual keyboard for guessing letters -->
+        <div id="keyboard" class="keyboard"></div>
+    </div>
+
+    <script>
+        // ========== GAME VARIABLES ==========
+        let guessedLetters = []; // Store letters guessed by the player
+        let incorrectGuesses = 0; // Count incorrect guesses
+        const maxGuesses = 6; // Maximum allowed wrong attempts before game over
+        const keyboard = document.getElementById("keyboard"); // Virtual keyboard container
+        const wordsContainer = document.getElementById("words"); // Word display area
+        const hangmanDisplay = document.getElementById("hangman"); // Hangman drawing area
+        const wrongGuessesDisplay = document.getElementById("wrong-guesses"); // Wrong guess display
+        let chosenWord = ""; // The actual word to guess
+
+        // ========== FETCH RANDOM WORD FROM API ==========
+        async function api() {
+            let obj = await fetch('https://random-words-api-plum.vercel.app/word/noun'); // Fetch a random noun from API
+            let data = await obj.json(); // Convert response to JSON
+
+            let words = data.map((val) => val.word); // Extract the word from API response
+            chosenWord = words[0].toLowerCase(); // Convert word to lowercase for consistency
+            
+            console.log("Word to Guess:", chosenWord); // Debugging: Print the word in console
+
+            // Display underscores (_) for each letter in the word
+            wordsContainer.innerHTML = "_ ".repeat(chosenWord.length);
+
+            setupKeyboard(); // Call function to generate the keyboard
+        }
+
+        // ========== SETUP VIRTUAL KEYBOARD ==========
+        function setupKeyboard() {
+            const alphabet = "abcdefghijklmnopqrstuvwxyz"; // List of letters
+            alphabet.split("").forEach((letter) => {
+                const button = document.createElement("button"); // Create a button for each letter
+                button.textContent = letter; // Set the letter as button text
+                button.addEventListener("click", () => handleGuess(letter)); // Add click event to handle guessing
+                keyboard.appendChild(button); // Add button to keyboard container
+            });
+        }
+
+        // ========== HANDLE LETTER GUESSES ==========
+        function handleGuess(letter) {
+            if (guessedLetters.includes(letter) || incorrectGuesses >= maxGuesses) return; // Ignore if already guessed or game over
+
+            guessedLetters.push(letter); // Store guessed letter
+
+            if (chosenWord.includes(letter)) {
+                updateWordDisplay(); // Update word display if the letter is correct
+            } else {
+                incorrectGuesses++; // Increment incorrect guess counter
+                updateHangmanDisplay(); // Update hangman drawing
+            }
+            updateWrongGuesses(); // Update list of incorrect guesses
+        }
+
+        // ========== UPDATE WORD DISPLAY WITH GUESSED LETTERS ==========
+        function updateWordDisplay() {
+            let wordDisplay = chosenWord.split("").map((letter) =>
+                guessedLetters.includes(letter) ? letter : "_"
+            ).join(" "); // Reveal correctly guessed letters, keep others hidden
+
+            wordsContainer.innerHTML = wordDisplay; // Update the word display on the page
+
+            if (!wordDisplay.includes("_")) {
+                setTimeout(() => alert("🎉 You won! Congratulations!"), 500); // Alert win message when all letters are guessed
+            }
+        }
+
+        // ========== UPDATE INCORRECT GUESSES DISPLAY ==========
+        function updateWrongGuesses() {
+            let wrongGuesses = guessedLetters.filter(letter => !chosenWord.includes(letter)); // Filter out wrong guesses
+            wrongGuessesDisplay.innerHTML = "Wrong guesses: " + wrongGuesses.join(", "); // Display wrong guesses
+        }
+
+        // ========== UPDATE HANGMAN DRAWING (IMAGES OR TEXT) ==========
+        function updateHangmanDisplay() {
+            hangmanDisplay.innerHTML = `<img src="hangman${incorrectGuesses}.png" alt="Hangman" />`; // Change image based on incorrect guesses
+            
+            if (incorrectGuesses >= maxGuesses) {
+                setTimeout(() => alert(`💀 Game over! The word was: "${chosenWord}"`), 500); // Show losing message
+            }
+        }
+
+        // ========== INITIALIZE GAME ==========
+        api(); // Call API to fetch a word and start the game
+    </script>
+</body>
+</html>

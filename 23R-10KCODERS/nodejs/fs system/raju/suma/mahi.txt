@@ -1,0 +1,1 @@
+{"name":"mahi","role":"developer","age":25,"salary":30000}

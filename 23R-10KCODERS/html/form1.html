@@ -4,51 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form</title>
-    <style></style>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
     <div class="container" id="container">
-      <form id="form1">
-        <h1>Instagram</h1>
-        <input type="text" id="emailaddress" placeholder="Mobile number or email address" required><br><br>
-        <input type="password"  id="pwd" placeholder="Password" required><br><br>
-        <input type="text" id="fname" placeholder="Full Name" required><br><br>
-        <input type="text" id="Username" placeholder="Username" required><br><br>
-        <p id="p1">People who use our service may have uploaded your contact information to Instagram. </p>
-        <input type="button" value="Sign Up" id="button">
-      </form>
+        <form id="form1">
+            <h1>Instagram</h1>
+            <input type="text" id="emailaddress" placeholder="Mobile number or email address" required>
+            <span id="emailError" class="error"></span><br><br>
+            <input type="password" id="pwd" placeholder="Password" required>
+            <span id="passwordError" class="error"></span><br><br>
+            <input type="text" id="fname" placeholder="Full Name" required><br><br>
+            <input type="text" id="Username" placeholder="Username" required><br><br>
+            <p id="p1">People who use our service may have uploaded your contact information to Instagram.</p>
+            <input type="button" value="Sign Up" id="button">
+        </form>
     </div>
     <script>
-          let form1=document.getElementById("form1");
-        form1.addEventListener("click",(e)=>{
-            e.preventDefault()
-        let ip1=document.getElementById("emailaddress").value.trim()
-        let ip2=document.getElementById("pwd").value.trim()
-        let ip3=document.getElementById("fname").value.trim()
-        let ip4=document.getElementById("Username").value.trim()
-        let btn=document.getElementById("button")
+        const form1 = document.getElementById("form1");
+        const btn = document.getElementById("button");
+
+        btn.addEventListener("click", (e) => {
+            e.preventDefault(); // Prevent form submission
             let isValid = true;
 
-// Email or Mobile number validation
-let emailRegex = /^[\w._]+@[a-z]+\.[a-z]{2,3}$/;
-let mobileRegex = /^[\d]{10}$/;
-if (!emailRegex.test(ip1) && !mobileRegex.test(ip1)) {
-    
-    ip1.textContent = "Enter a valid email or 10-digit mobile number.";
-    alert("Invalid email or mobile number. Please check your input.");
-    isValid = false;
-}else{
-    alert("it is not match")
-}
-let passwordRegex=/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$^&*]{8,}/
-if(!passwordRegex.test(ip2))
-ip2.textContent="Enter a valid password"
-isValid=false
-if(isValid){
-           alert("form submit successfully")
-        }
-        })
-        
+            // Input values
+            const ip1 = document.getElementById("emailaddress").value.trim();
+            const ip2 = document.getElementById("pwd").value.trim();
+
+            // Error spans
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
+
+            // Clear previous errors
+            emailError.textContent = "";
+            passwordError.textContent = "";
+
+            // Email or Mobile number validation
+            const emailRegex = /^[\w._]+@[a-z]+\.[a-z]{2,3}$/;
+            const mobileRegex = /^[\d]{10}$/;
+            if (!emailRegex.test(ip1) && !mobileRegex.test(ip1)) {
+                emailError.textContent = "Enter a valid email or 10-digit mobile number.";
+                isValid = false;
+            }
+
+            // Password validation
+            const passwordRegex = /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$^&*]{8,}/;
+            if (!passwordRegex.test(ip2)) {
+                passwordError.textContent =
+                    "Password must contain at least 8 characters, including uppercase, lowercase, number, and special character.";
+                isValid = false;
+            }
+
+            // Final validation check
+            if (isValid) {
+                alert("Form submitted successfully!");
+                form1.reset(); // Clear form inputs
+            }
+        });
     </script>
 </body>
 </html>

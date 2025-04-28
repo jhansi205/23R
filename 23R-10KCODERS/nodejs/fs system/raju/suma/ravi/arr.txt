@@ -1,0 +1,2 @@
+["apple","bag","sasi"]this is array
+this is array this is array

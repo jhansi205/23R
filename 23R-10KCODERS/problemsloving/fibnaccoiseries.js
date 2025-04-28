@@ -4,9 +4,9 @@ var c;
 var count = 0;
 
 for (i = 0; i <= 10; i++) {
-//   if (count == 10) {
-    console.log(a);  // This will print `a` when `count` reaches 10.
-//   }
+
+    console.log(a);  
+
   c = a + b;
   a = b;
   b = c;
